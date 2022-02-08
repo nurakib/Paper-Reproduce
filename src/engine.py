@@ -23,7 +23,6 @@ def train_fn(data_loader, model, optimizer, device, scheduler):
 
         optimizer.zero_grad()
         outputs = model(ids=ids, mask=mask, token_type_ids=token_type_ids)
-
         loss = loss_fn(outputs, targets)
         loss.backward()
         optimizer.step()
@@ -32,6 +31,7 @@ def train_fn(data_loader, model, optimizer, device, scheduler):
 
 def eval_fn(data_loader, model, device):
     model.eval()
+
     fin_targets = []
     fin_outputs = []
     with torch.no_grad():
@@ -44,9 +44,18 @@ def eval_fn(data_loader, model, device):
             ids = ids.to(device, dtype=torch.long)
             token_type_ids = token_type_ids.to(device, dtype=torch.long)
             mask = mask.to(device, dtype=torch.long)
-            targets = targets.to(device, dtype=torch.float)
+            targets = targets.to(device, dtype=torch.long)
 
-            outputs = model(ids=ids, mask=mask, token_type_ids=token_type_ids)
+            outputs = model(
+                ids=ids, 
+                mask=mask, 
+                token_type_ids=token_type_ids
+            )
+
+            outputs = torch.log_softmax(outputs,dim=1)
+            outputs = torch.argmax(outputs,dim=1)
+            
             fin_targets.extend(targets.cpu().detach().numpy().tolist())
-            fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
+            fin_outputs.extend(outputs.cpu().detach().numpy().tolist())
+
     return fin_outputs, fin_targets

@@ -1,3 +1,4 @@
+from operator import le
 import config
 import dataset
 import engine
@@ -5,6 +6,8 @@ import torch
 import pandas as pd
 import torch.nn as nn
 import numpy as np
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 from model import BERTBaseUncased
 from sklearn import model_selection
@@ -14,53 +17,30 @@ from transformers import get_linear_schedule_with_warmup
 
 
 def run():
-    circa_df = pd.read_csv(config.CIRCA_DATASET, sep='\t', na_filter = False)
-    circa_df = circa_df[(circa_df.goldstandard2 != 'Other') & (circa_df.goldstandard2 != 'NA')]
+    df_train = pd.read_csv(config.MNLI_TRAIN)
+    df_valid = pd.read_csv(config.MNLI_VALID)
 
-    selected_columns = circa_df[["question-X", "answer-Y", "goldstandard2"]]
-
-    df = selected_columns.copy()
-
-    df.rename(columns = {'question-X':'question', 'answer-Y':'answer', 'goldstandard2':'target'}, inplace = True)
-    df["target"] = df["target"].map(config.LABEL_CODES)
-
-    df = df[0:50]
-    print(df)
-    print(df['target'].unique())
-
-    df = df.reset_index(drop=True)
+    #for protype
+    df_train = df_train[:config.NUMBER_OF_SAMPLES]
+    df_valid = df_valid[:config.NUMBER_OF_SAMPLES]
 
     # print(df_train)
 
-    # dfx.sentiment = dfx.sentiment.apply(lambda x: 1 if x == "positive" else 0)
-
-    df_train = df[0:40] 
-    df_valid = df[40:50]
-    # df_train, df_valid = model_selection.train_test_split(
-    #     dfx, test_size=0.1, random_state=42, stratify=dfx.sentiment.values
-    # )
-
-    # df_train = df_train.reset_index(drop=True)
-    # df_valid = df_valid.reset_index(drop=True)
-
-    # train_dataset = dataset.BERTDataset(
-    #     review=df_train.review.values, target=df_train.sentiment.values
-    # )
-
     train_dataset = dataset.CIRCADataset(
-        question = df_train.question.values, 
-        answer = df_train.answer.values, 
+        sentence_1 = df_train.sentence_1.values, 
+        sentence_2 = df_train.sentence_2.values, 
         target = df_train.target.values
     )
-
+    
+    # print(train_dataset[1])
 
     train_data_loader = torch.utils.data.DataLoader(
-        train_dataset, batch_size=config.TRAIN_BATCH_SIZE, num_workers=4
+        train_dataset, batch_size=config.TRAIN_BATCH_SIZE, num_workers=1
     )
 
     valid_dataset = dataset.CIRCADataset(
-        question = df_valid.question.values, 
-        answer = df_valid.answer.values, 
+        sentence_1 = df_valid.sentence_1.values, 
+        sentence_2 = df_valid.sentence_2.values, 
         target = df_valid.target.values
     )
 
@@ -68,6 +48,7 @@ def run():
         valid_dataset, batch_size=config.VALID_BATCH_SIZE, num_workers=1
     )
 
+    print(f'Loaded: {len(train_dataset)} training samples and {len(valid_dataset)} validation samples')
     device = torch.device(config.DEVICE)
     model = BERTBaseUncased()
     model.to(device)
@@ -90,7 +71,7 @@ def run():
     ]
 
     num_train_steps = int(len(df_train) / config.TRAIN_BATCH_SIZE * config.EPOCHS)
-    optimizer = AdamW(optimizer_parameters, lr=3e-5)
+    optimizer = AdamW(optimizer_parameters, lr=config.LEARNING_RATE)
     scheduler = get_linear_schedule_with_warmup(
         optimizer, num_warmup_steps=0, num_training_steps=num_train_steps
     )
@@ -100,17 +81,15 @@ def run():
         engine.train_fn(train_data_loader, model, optimizer, device, scheduler)
         outputs, targets = engine.eval_fn(valid_data_loader, model, device)
         outputs = np.array(outputs) >= 0.5
-
-        print(outputs)
-
-        print(targets)
         
         accuracy = metrics.accuracy_score(targets, outputs)
         print(f"Accuracy Score = {accuracy}")
         if accuracy > best_accuracy:
+
             torch.save(model.state_dict(), config.MODEL_PATH)
             best_accuracy = accuracy
 
 
 if __name__ == "__main__":
     run()
+
