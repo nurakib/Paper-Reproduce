@@ -12,7 +12,7 @@
 #### Result Comparision
 
 | Experiment              | F1 scores reported on the paper | Result in this code-base | Deviation(%) |  Trained on Exact hyper-parameters mentioned in the paper |
-| ----------------------- | :-----------: | :--------:|  :--------:|  
+| ----------------------- | :-----------: | :--------:|  :--------:| :--------: |
 | Baseline-MNLI           | 28.9 |  |  | :x: |
 | Baseline-BoolQ          | 62.7 |  |  | :x: |
 | Bert-circa-question-only| 56.0 | 54.1 | :small_red_triangle_down: 3.39% | :heavy_check_mark: |
