@@ -11,7 +11,7 @@
 
 #### Result Comparision
 
-| Experiment              | F1 scores reported on the paper | Result in this code-base | Deviation(%) |  Trained on Exact hyper-parameters mentioned in the paper |
+| Experiment              | F1 scores reported on the paper | Result in this code-base | Deviation(%) |  Training Batch size as mentioned in the paper |
 | ----------------------- | :-----------: | :--------:|  :--------:| :--------: |
 | Baseline-MNLI           | 28.9 |  |  | :x: |
 | Baseline-BoolQ          | 62.7 |  |  | :x: |
