@@ -1,14 +1,18 @@
-import config
+# import config
 import torch
+import pandas as pd
 
 
 class CIRCADataset:
-    def __init__(self, sentence_1, sentence_2, target):
+    def __init__(self, sentence_1, sentence_2, target, tokenizer, max_len):
         self.sentence_1 = sentence_1
         self.sentence_2 = sentence_2
         self.target = target
-        self.tokenizer = config.TOKENIZER
-        self.max_len = config.MAX_LEN
+        # self.tokenizer = config.TOKENIZER
+        # self.max_len = config.MAX_LEN
+        self.tokenizer = tokenizer
+        self.max_len = max_len
+
 
     def __len__(self):
         return len(self.sentence_1)
@@ -26,7 +30,8 @@ class CIRCADataset:
             add_special_tokens=True,
             max_length=self.max_len,
             pad_to_max_length=True,
-            truncation=True 
+            truncation=True,
+            truncation_strategy="only_second",
         )
 
         ids = inputs["input_ids"]
