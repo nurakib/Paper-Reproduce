@@ -25,12 +25,8 @@ def run():
 
     df_test = pd.read_csv(args.test_data)
 
-    print(len(df_test))
-
-    # if hasattr(args, 'sample_percentage'): 
-    #     df_test = df_test[:int(len(df_test) * args.sample_percentage / 100)]
-
-    print(len(df_test))
+    if hasattr(args, 'sample_percentage'): 
+        df_test = df_test[:int(len(df_test) * args.sample_percentage / 100)]
 
     BERT_TOKENIZER = transformers.BertTokenizer.from_pretrained(
                 args.encoder_model, 
@@ -45,7 +41,6 @@ def run():
         max_len = args.max_length
     )
     
-    print(test_dataset[1])
 
     test_data_loader = torch.utils.data.DataLoader(
         test_dataset, batch_size=args.train_batch_size, num_workers=2

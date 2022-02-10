@@ -67,6 +67,10 @@ def run():
     print(f'Loaded: {len(train_dataset)} training samples and {len(valid_dataset)} validation samples')
     device = torch.device(config.DEVICE)
     model = BERTBaseUncased(dropout=args.dropout, n_class=args.n_class)
+    if args.trained_model is not None: 
+        print(f'Loaded model from: {args.trained_model}')
+        model.load_state_dict(torch.load(args.trained_model))
+    
     model.to(device)
 
     param_optimizer = list(model.named_parameters())
