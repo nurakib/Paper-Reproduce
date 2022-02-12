@@ -19,4 +19,4 @@
 | Bert-circa-answer-only  | 81.7 | 81.1 | :small_red_triangle_down: 0.6 | :heavy_check_mark: |
 | Bert-circa              | 87.8 | 87.2 | :small_red_triangle_down: 0.6 | :heavy_check_mark: |
 | Bert-MNLI-circa         | 88.2 | 88.2 | - | :x: |
-| Bert-BoolQ-circa        | 87.1 | 87.2 | :small_green_triangle: 0.1 | :x: |
+| Bert-BoolQ-circa        | 87.1 | 87.2 | :small_red_triangle: 0.1 | :x: |
