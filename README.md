@@ -22,7 +22,7 @@
 | Bert-BoolQ-circa        | 87.1 | 87.2 | :small_red_triangle: 0.1 | :x: |
 
 
-#### Hyper-parameters and 
+#### Hyper-parameters and Batch sizes 
 
 | Experiment              | Learning Rate | Train Batch Size | Valid Batch Size |  Test Batch Size | Max Length | n_class | Dropout |
 | ----------------------- | :-----------: | :--------:|  :--------:| :--------: |  :--------: | :--------: | :--------: |
