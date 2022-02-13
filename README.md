@@ -26,10 +26,10 @@
 
 | Experiment              | Learning Rate | Train Batch Size | Valid Batch Size |  Test Batch Size | Max Length | n_class | Dropout |
 | ----------------------- | :-----------: | :--------:|  :--------:| :--------: |  :--------: | :--------: | :--------: |
-| Baseline-MNLI           | 2e-5 | 26.3 | 8 | 4 | 4 | 512 | 3 | 0.3 |
-| Baseline-BoolQ          | 2e-5 | 65.0 | 8 | 4 | 4 | 512 | 2 | 0.3 |
-| Bert-circa-question-only| 3e-5 | 55.4 | 32 | 16 | 16 | 128 | 4 | 0.3 |
-| Bert-circa-answer-only  | 2e-5 | 81.8 | 32 | 16 | 16 | 128 | 4 | 0.3 |
-| Bert-circa              | 3e-5 | 87.7 | 32 | 16 | 16 | 128 | 4 | 0.3 |
-| Bert-MNLI-circa         | 2e-5 | 88.2 | 8 | 4 | 4 | 512 | 4 | 0.3 |
-| Bert-BoolQ-circa        | 3e-5 | 87.2 | 8 | 4 | 4 | 512 | 4 | 0.3 |
+| Baseline-MNLI           | 2e-5 | 8 | 4 | 4 | 512 | 3 | 0.3 |
+| Baseline-BoolQ          | 2e-5 | 8 | 4 | 4 | 512 | 2 | 0.3 |
+| Bert-circa-question-only| 3e-5 | 32 | 16 | 16 | 128 | 4 | 0.3 |
+| Bert-circa-answer-only  | 2e-5 | 32 | 16 | 16 | 128 | 4 | 0.3 |
+| Bert-circa              | 3e-5 | 32 | 16 | 16 | 128 | 4 | 0.3 |
+| Bert-MNLI-circa         | 2e-5 | 8 | 4 | 4 | 512 | 4 | 0.3 |
+| Bert-BoolQ-circa        | 3e-5 | 8 | 4 | 4 | 512 | 4 | 0.3 |
