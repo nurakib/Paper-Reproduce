@@ -25,7 +25,7 @@
 #### Hyper-parameters and 
 
 | Experiment              | Learning Rate | Train Batch Size | Valid Batch Size |  Test Batch Size | Max Length | n_class | Dropout |
-| ----------------------- | :-----------: | :--------:|  :--------:| :--------: |  :--------: | :--------: | :--------: | :--------: |
+| ----------------------- | :-----------: | :--------:|  :--------:| :--------: |  :--------: | :--------: | :--------: |
 | Baseline-MNLI           | 2e-5 | 26.3 | 8 | 4 | 4 | 512 | 3 | 0.3 |
 | Baseline-BoolQ          | 2e-5 | 65.0 | 8 | 4 | 4 | 512 | 2 | 0.3 |
 | Bert-circa-question-only| 3e-5 | 55.4 | 32 | 16 | 16 | 128 | 4 | 0.3 |
