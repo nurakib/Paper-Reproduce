@@ -14,7 +14,7 @@
 | Experiment              | F1 scores reported on the paper | Result in this code-base | Deviation(F1) |  Training Batch size as mentioned in the paper |
 | ----------------------- | :-----------: | :--------:|  :--------:| :--------: |
 | Baseline-MNLI           | 28.9 | 26.3 | :small_red_triangle_down: 2.6 | :x: |
-| Baseline-BoolQ          | 62.7 | 68.9 | :small_red_triangle: 6.2 | :x: |
+| Baseline-BoolQ          | 62.7 | 65.0 | :small_red_triangle: 2.3 | :x: |
 | Bert-circa-question-only| 56.0 | 55.4 | :small_red_triangle_down: 1.4 | :heavy_check_mark: |
 | Bert-circa-answer-only  | 81.7 | 81.8 | :small_red_triangle: 0.1 | :heavy_check_mark: |
 | Bert-circa              | 87.8 | 87.7 | :small_red_triangle_down: 0.1 | :heavy_check_mark: |
