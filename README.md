@@ -1,4 +1,4 @@
-## [“I’d rather just go to bed”: Understanding Indirect Answers](/https://aclanthology.org/2020.emnlp-main.601.pdf)
+## [“I’d rather just go to bed”: Understanding Indirect Answers](https://aclanthology.org/2020.emnlp-main.601.pdf)
 
 #### All experiments list (for relaxed labels) 
 - [x] Baseline-MNLI
